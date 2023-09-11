@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html>
+
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <title>Mamba</title>
+
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💫</text></svg>">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.8.0/codemirror.min.css">
+    <link rel="stylesheet" href="css/app.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.8.0/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.5.3/clipboard.min.js"></script>
+    <script src="js/app.js"></script>
+</head>
+
+<body>
+    <div class="container" id="main">
+        <div class="row">
+            <h2 class="col-md-12 text-center">
+                <b>Mamba</b>: Bringing Multi-Dimensional ABR to WebRTC</br>
+            </h2>
+        </div>
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <ul class="list-inline">
+                    <li>
+                        <a>
+                          Yueheng Li
+                        </a>
+                        </br>Nanjing University
+                    </li>
+                    <li>
+                        <a>
+                          Zicheng Zhang
+                        </a>
+                        </br>Nanjing University
+                    </li>
+                    <li>
+                        <a href="https://vision.nju.edu.cn/84/d8/c29470a492760/page.htm">
+                          Hao Chen
+                        </a>
+                        </br>Nanjing University
+                    </li>
+                    <li>
+                        <a href="https://vision.nju.edu.cn/fc/d3/c29470a457939/page.htm">
+                          Zhan Ma
+                        </a>
+                        </br>Nanjing University
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="row">
+                <div class="col-md-4 col-md-offset-4 text-center">
+                    <ul class="nav nav-pills nav-justified">
+                        <li>
+                            <a href="https://github.com/arthur9812/MM23-Mamba/blob/main/MM23_Li_Mamba.pdf">
+                            <image src="img/mamba-paper.png" height="60px">
+                                <h4><strong>Paper</strong></h4>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://github.com/arthur9812/MM23-Mamba">
+                            <image src="img/github.png" height="60px">
+                                <h4><strong>Code</strong></h4>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+        </div>
+
+        <div class="row">
+            <div class="text-center">
+                <img src="img/mamba-key.png" height="240px">
+            </div>
+            <div class="col-md-8 col-md-offset-2">
+                <p class="text-center">
+                    The key brilliance of Mamba compared to default WebRTC.
+                </p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="text-center">
+                <h3>
+                    Abstract
+                </h3>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <p class="text-justify">
+                    Contemporary real-time video communication systems, such as WebRTC, use an 
+                    adaptive bitrate (ABR) algorithm to assure highquality and low-delay services, 
+                    e.g., promptly adjusting video bitrate according to the instantaneous network 
+                    bandwidth. However, target bitrate decisions in the network and bitrate control in the 
+                    codec are typically incoordinated and simply ignoring the effect of inappropriate 
+                    resolution and frame rate settings also leads to compromised results in bitrate control, 
+                    thus devastatingly deteriorating the quality of experience (QoE). To tackle these challenges, Mamba, 
+                    an end-to-end multi-dimensional ABR algorithm is proposed, which utilizes multi-agent reinforcement 
+                    learning (MARL) to maximize the user's QoE by adaptively and collaboratively adjusting encoding 
+                    factors including the quantization parameters (QP), resolution, and frame rate based on observed states such as network conditions 
+                    and video complexity information in a video conferencing system. We also introduce curriculum learning to improve the training efficiency 
+                    of MARL. Both the in-lab and real-world evaluation results demonstrate the remarkable efficacy of Mamba.
+                </p>
+            </div>
+        </div>
+
+
+
+        <div class="row">
+            <div class="text-center">
+                <h3>
+                    Training
+                </h3>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <div class="text-center">
+                    <img src="img/mamba-training.png" height="240px">
+                </div>
+                </br>
+                <p class="text-justify">
+                    To support joint adaptation of the QP, resolution, and frame rate,
+                    Mamba uses MARL to learn an end-to-end multi-dimensional ABR
+                    policy. The most intuitive idea is to train Mamba's policy directly
+                    from scratch using the existing MARL algorithm. However, it may
+                    be very inefficient with unacceptable training time, due to the
+                    inherent non-stationarity problem of multi-agent tasks. As a result, 
+                    direct training from scratch can easily prevent
+                    an agent from exploring the optimal policy since it is unable to
+                    cooperate with other agents perfectly. To address the issues,
+                    we introduce curriculum learning in the training of Mamba, which
+                    has been proven to be helpful in multi-agent training. As
+                    shown, we design a two-stage curriculum for MABR
+                    learning: foundation course and team course.
+                </p>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="text-center">
+                <h3>
+                    System Implementation
+                </h3>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <div class="text-center">
+                    <img src="img/mamba-system.png" height="210px">
+                </div>
+                </br>
+                <p class="text-justify">
+                    We implemented Mamba as an independent
+                    module to integrate into a WebRTC-compatible testbed, with the
+                    aim to replace the original congestion control and bitrate control
+                    modules at the system level. All of the experiments for observation
+                    and evaluation were conducted based on this testbed. The abve figure
+                    exhibits the seamless integration of Mamba into the existing
+                    WebRTC system. The modules marked by solid lines in the figure
+                    are added by Mamba, primarily consisting of Mamba agents and a
+                    monitor to gather state observations for Mamba. And the remaining
+                    modules indicated by dashed lines inherit from the original
+                    WebRTC system. The monitor module collects the observations of
+                    content complexity information and network conditions, which are
+                    subsequently input into Mamba's RL agents to make decisions on
+                    encoding factors for the video encoder.
+                </p>
+            </div>
+        </div>
+
+
+
+
+        <div class="row">
+            <div class="text-center">
+                <h3>
+                    Experiments
+                </h3>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="text-center">
+                <img src="img/mamba-trace.png" height="160px">
+						</div>
+                    </br>
+            <div class="col-md-8 col-md-offset-2">
+							<p class="text-center">
+                                Comparing Mamba with the state-of-the-art WebRTC and Loki in the form of CDF distribution. The metrics of
+                                video bitrate, picture quality (in VMAF), playback frame rate, and delay are used to evaluate their performances. Results were
+                                collected on Orca, NYU_METS, Belgium-4G, US_5G network bandwidth trace datasets.
+							</p>
+						</div>
+        </div>
+
+        
+        <div class="row">
+            <div class="text-center">
+                <img src="img/mamba-real.png" height="200px">
+						</div>
+            <div class="col-md-8 col-md-offset-2">
+							<p class="text-center">
+                                Real-world evaluation results of Mamba,WebRTC,
+                                and Loki in both stationary and moving scenarios.
+							</p>
+						</div>
+        </div>
+
+            
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
+                    Citation
+                </h3>
+                <div class="form-group col-md-10 col-md-offset-1">
+                    <textarea id="bibtex" class="form-control" readonly>
+@inproceedings{xu2023karma,
+    author = {Li, Yueheng and Zhang, Zicheng and Chen, Hao and Ma, Zhan},
+    title = {Mamba: Bringing Multi-Dimensional ABR to WebRTC},
+    booktitle = {Proceedings of the 31st ACM International Conference on Multimedia},
+    DOI={10.1145/3581783.3611915},
+    year = {2023}
+}</textarea>
+                    </br>
+                    </br>
+                    </br>
+                    </br>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
